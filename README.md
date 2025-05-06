@@ -1,12 +1,14 @@
 ---
 Date_of_creation: 2025-05-06 화 22:56:25
 Last_modified:
-  - 2025-05-07 수 00:00:19
+  - 2025-05-07 수 01:15:03
   - 2025-05-06 화 23:58:47
-aliases: 
+aliases:
+  - Second Teacher
+  - Second Teacher PRD
 tags:
   - 공부/3학년_1학기/SW프로젝트_기초/3회_차
-Reference:
+Reference: 
 ---
 # 1. 개요
 ---
@@ -17,7 +19,7 @@ Reference:
 - **수행기간**: 2025.04.25 ~ 2025.05.16 (3주)
 - **사용 기술**: Python, Flask, Firebase Firestore, 외부 STT API
 - **팀원 및 역할**:
-  - **이수영**: 프론트엔드 개발, 발표자료 작성 (팀장이라 볼드 표시)
+  - **이수영(팀장)**: 프론트엔드 개발, 발표자료 작성
   - 임기홍: DB 및 API 연동, 문서 작성
   - 임상혁: 백엔드 개발, GitHub 관리
 
@@ -34,33 +36,37 @@ Reference:
 | 💾 DB 연동  | 학습 데이터 저장     | Firestore 기반으로 생성된 문제 및 학습 데이터 저장/조회 |
 
 # 3. 기술 스택 및 상세 기능 (분류 통합)
-
+---
 ## 🔧 **Backend**
-
+---
 - **사용 기술**: Python, Flask
 - **주요 기능**:
     - 음성 파일 STT 변환 처리
-        - Google STT API 등 외부 음성 인식 API 사용
+        - `Google STT`, `Whisper` API 등 외부 음성 인식 API 사용
         - 예외 처리: 음질 저하 시 오류 메시지 출력
     - 문제 자동 생성
         - 방식: 템플릿 매칭 + 자연어 처리
         - 문제 형태: 객관식, 주관식
     - API 연동 및 백엔드 로직 처리 전반
-
----
+- <font color="#de7802"><b>로컬 서버 실행 방법</b></font>
+	1. **SDK 키 파일**과 **웹 API 키 파일**은 `app.py`가 있는 **가장 상위 디렉토리**에 위치시켜 주세요.
+	2. 위 명령어를 터미널에서 순서대로 입력하세요.
+  ```python title="실행 방법"
+  pip install -r requirements.txt
+  python app.py
+  ```
+	3. 실행 후 [http://127.0.0.1:5000/](http://127.0.0.1:5000/) 주소로 접속하면 됩니다.
 
 ## 🎨 **Frontend**
-
+---
 - **사용 기술**: HTML / CSS / JS 기반 (React 스타일 포함 가능)
 - **주요 기능**:
     - 문제 표시 UI
     - 문제 제출 인터페이스
     - 반응형 UI 구현
 
----
-
 ## 🗂 **Database**
-
+---
 - **사용 기술**: Firebase Firestore
 - **주요 기능**:
     - 문제 및 사용자 기록 저장
@@ -73,8 +79,9 @@ Reference:
 ```mermaid
 graph TD
   A[강의 음성 업로드] --> B[STT 변환 처리]
-  B --> C[텍스트 전처리 및 요약]
-  C --> D[문제 생성 로직 실행]
+  B --> C1[음성 텍스트 전처리]
+  C1 --> D[문제 생성 로직 실행]
+  C2[강의 교안 업로드] --> D
   D --> E{문제 유형 선택}
   E --> F1[객관식 생성]
   E --> F2[주관식 생성]
@@ -97,7 +104,7 @@ graph TD
 ---
 - 실시간 소통: **Discord**, **KakaoTalk**
 - 코드 관리: **GitHub**
-- 문서 작성: **Google Docs**, **Obsidian**
+- 문서 작성: **Google Docs([정의서](https://docs.google.com/document/d/1aTtVSrTeK9DOHeq0TXSOjG3DcsUjHw4IXVyYV5uOfes/edit?usp=sharing), [분석서](https://docs.google.com/document/d/1P3BjDj4pYKQArDjXROtn6MUnWVdLQyxWOLknM7tSPFc/edit?usp=sharing))**, [**Obsidian**](https://obsidian.md/)
 - 회의: 주 1회 디스코드 회의 + 주기적 코드 업데이트
 
 # 7. 예상 리스크 및 대처
@@ -109,25 +116,25 @@ graph TD
 | 강의자료 형식 다양성 | 최소 기준 가이드라인 마련 |
 
 ---
-## 🔹 1. 기획 및 자료 준비
+## 🔹 7.1. 기획 및 자료 준비
 - [ ] 자료 수집
 	- [ ] 강의 음성 파일 준비
 	- [ ] 강의 교안 PDF 준비
 - [ ] 문제 유형(객관식, 주관식 등) 정의
 
-## 🔹 2. 백엔드 개발
+## 🔹 7.2. 백엔드 개발
 - [ ] Flask 프로젝트 초기화 및 구조 설계
-- [ ] 음성 텍스트 전처리 - [ ] STT 전처리 로직 구현
+- [ ] STT 전처리 로직 구현
 - [ ] 문제 생성을 위한 템플릿 매칭 로직 설계
     - [ ] 문제 생성 로직
 - [ ] API 요청 처리 라우팅 구성
 
-## 🔹 3. 프론트엔드 개발
+## 🔹 7.3. 프론트엔드 개발
 - [ ] UI 기본 틀 설계 (문제 출력/입력 창 등)
 - [ ] 문제 결과 출력 페이지 구현
 - [ ] API 연결 테스트
 
-## 🔹 4. DB 및 API 연동
+## 🔹 7.4. DB 및 API 연동
 - [ ] Firebase Firestore 설정
 	- [ ] Firestore 연동
 - [ ] 데이터 스키마 설계 (강의정보, 문제, 사용자)
@@ -135,12 +142,12 @@ graph TD
 	- [ ] 변환 테스트
 - [ ] DB 저장 및 조회 기능 구현
 
-## 🔹 5. 테스트 및 통합
+## 🔹 7.5. 테스트 및 통합
 - [ ] 음성 파일 → 문제 생성 흐름 전체 테스트
 - [ ] 오류 및 예외 처리 구현
 - [ ] UI/UX 테스트 및 피드백 반영
 
-## 🔹 6. 문서 및 발표자료
+## 🔹 7.6. 문서 및 발표자료
 - [ ] 발표자료 제작
 - [ ] GitHub README 작성
 - [ ] 프로젝트 회고 정리
