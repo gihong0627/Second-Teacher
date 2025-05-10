@@ -2,3 +2,8 @@ flask
 openai-whisper
 torch
 werkzeug
+firebase_admin
+gunicorn
+python-dotenv
+requests
+PyPDF2
