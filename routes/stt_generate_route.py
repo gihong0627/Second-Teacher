@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 import os
 from services.whisper_service import transcribe_audio
 from services.question_generator import generate_question
-from services.firestore_service import save_question
+from services.firebase_service import save_question
 
 stt_gen_bp = Blueprint('stt_gen', __name__)
 UPLOAD_FOLDER = 'uploads/'
