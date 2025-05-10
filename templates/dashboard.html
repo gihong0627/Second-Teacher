@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_styles.css') }}">
+    <title>대시보드</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('public.logout') }}">로그아웃</a>
+    </nav>
+    
+    <main>
+        <h1>대시보드</h1>
+        <p>사용자의 대시보드 입니다.</p>
+        <div>
+            <h2>기능</h2>
+            <ul>
+                <li><a href="{{ url_for('pdf.summarizer') }}">PDF 요약기</a></li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>
