@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_styles.css') }}">
+    <title>Login</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('public.home') }}">홈페이지</a>
+        <a href="{{ url_for('public.login') }}">로그인</a>
+        <a href="{{ url_for('public.signup') }}">회원가입</a>
+    </nav>
+    
+    <main>
+        <h1>로그인</h1>
+        <div class="login-form">
+            <input type="email" id="email-input" placeholder="이메일" required>
+            <input type="password" id="password-input" placeholder="비밀번호" required>
+            <button id="sign-in-btn">로그인</button>
+            
+            <button id="sign-in-with-google-btn">
+                <img src="{{ url_for('static', filename='images/google-icon.png') }}" alt="Google">
+                Sign in with Google
+            </button>
+            
+            <p>계정이 없으십니까? <a href="{{ url_for('public.signup') }}">회원가입</a></p>
+        </div>
+    </main>
+    
+    <script src="{{ url_for('static', filename='auth-config.js') }}" type="module"></script>
+    <script src="{{ url_for('static', filename='login-auth.js') }}" type="module"></script>
+</body>
+</html>
