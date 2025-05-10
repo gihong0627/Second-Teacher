@@ -1,6 +1,6 @@
 from flask import Blueprint, request, session, redirect, url_for
-from firebase_admin import auth
 from repositories.user_repository import UserRepository
+from services.firebase_service import verify_token
 
 auth_bp = Blueprint('auth', __name__)
 user_repository = UserRepository()
@@ -15,7 +15,10 @@ def authorize():
     
     try:
         # 토큰 검증
-        decoded_token = auth.verify_id_token(token, check_revoked=True, clock_skew_seconds=60)
+        decoded_token = verify_token(token)
+        if not decoded_token:
+            return "Unauthorized", 401
+            
         user_id = decoded_token['uid']
         email = decoded_token.get('email', '')
         
@@ -26,7 +29,6 @@ def authorize():
         if not user_repository.exists(user_id):
             user_repository.create(user_id, email)
             print(f"User document created for {user_id}")
-        
         
         if not user_repository.pdf_exists(user_id):
             user_repository.create_pdf_document(user_id)

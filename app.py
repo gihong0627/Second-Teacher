@@ -4,20 +4,17 @@ from routes.stt_generate_route import stt_gen_bp
 from routes.auth import auth_bp
 from routes.public import public_bp
 from routes.dashboard import dashboard_bp
-import firebase_admin
-from firebase_admin import credentials, firestore
+from routes.pdf_summarizer import pdf_bp as pdf
 import os
 from dotenv import load_dotenv
+from services.firebase_service import db
+from config.settings import configure_app
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
-
-# Firebase Admin SDK setup
-cred = credentials.Certificate("firebase-auth.json")
-firebase_admin.initialize_app(cred)
-db = firestore.client()
+configure_app(app)
 
 # Register blueprints
 app.register_blueprint(stt_bp)
@@ -25,6 +22,7 @@ app.register_blueprint(stt_gen_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(public_bp)
 app.register_blueprint(dashboard_bp)
+app.register_blueprint(pdf)
 
 # Firebase config endpoint
 @app.route('/api/firebase-config')
