@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_styles.css') }}">
+    <title>Home</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('public.login') }}">로그인</a>
+        <a href="{{ url_for('public.signup') }}">회원가입</a>
+    </nav>
+    
+    <main>
+        <h1>Welcome</h1>
+        <p>홈페이지 입니다. 로그인 or 회원가입을 진행해주세요.</p>
+    </main>
+</body>
+</html>
